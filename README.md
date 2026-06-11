@@ -144,10 +144,9 @@ Accept: application/json
 ### Getting Jobs
 
 ```http
-curl --request GET \
-  --url 'https://{host}/ccx/api/staffing/v5/{tenant}/jobs/{jobId}' \
-  --header 'Authorization: Bearer {access_token}' \
-  --header 'Accept: application/json'
+GET /workday/api/staffing/v5/{tenant}/jobs/{jobId}
+Authorization: Bearer {access_token}
+Accept: application/json
 
 {
   "id": "JOB-12345",
@@ -187,10 +186,9 @@ curl --request GET \
 ### Getting Community (Org. Chart)
 
 ```http
-curl --request GET \
-  --url '/workday/api/staffing/v5/{tenant}/supervisoryOrganizations/{supervisoryOrgId}' \
-  --header 'Authorization: Bearer {access_token}' \
-  --header 'Accept: application/json'
+GET /workday/api/staffing/v5/{tenant}/supervisoryOrganizations/{supervisoryOrgId}
+Authorization: Bearer {access_token}
+Accept: application/json
 
 {
   "id": "SUP-1001",
