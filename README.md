@@ -63,3 +63,88 @@ sequenceDiagram
 
     App-->>User: Personalized application experience
 ```
+
+## Workday Integration
+
+The [Workday REST API](https://community.workday.com/sites/default/files/file-hosting/restapi/) seems relatively straightforward, but the general flow we'll adopt is...
+
+1. Start with workerId
+2. GET worker core record
+3. Extract references:
+   - locationId
+   - managerId
+   - supervisoryOrgId
+   - costCenterId
+   - positionId
+4. Follow references for location/org/manager detail
+5. Use RaaS or SOAP for non-standard data:
+   - certificates
+   - NHS / CDA metrics
+   - mentoring relationships
+   - messaging
+   - tenant-specific finance fields
+6. Return one normalised mobile-app payload
+
+## Endpoint Assumptions
+
+### Getting a Worker (practitioner)
+
+```http
+GET /workday/api/staffing/v5/{tenant}/workers/{workerId}
+Authorization: Bearer {access_token}
+Accept: application/json
+
+{
+  "id": "abc123workerid",
+  "descriptor": "Jane Smith",
+  "workerType": {
+    "id": "employee",
+    "descriptor": "Employee"
+  },
+  "primaryJob": {
+    "jobTitle": "Consultant",
+    "businessTitle": "Clinical Consultant",
+    "location": {
+      "id": "loc_001",
+      "descriptor": "London Practice"
+    },
+    "supervisoryOrganization": {
+      "id": "org_123",
+      "descriptor": "Digital Health"
+    }
+  },
+  "manager": {
+    "id": "worker_mgr_001",
+    "descriptor": "Alex Brown"
+  },
+  "workEmail": "jane.smith@mydentist.co.uk"
+}
+```
+
+### Getting a Location (practice)
+
+```http
+GET /workday/api/staffing/v5/{tenant}/locations/{locationId}
+Authorization: Bearer {access_token}
+Accept: application/json
+
+{
+  "id": "london_practice_001",
+  "name": "London Practice",
+  "type": "Practice Location",
+  "address": {
+    "line1": "1 Example Street",
+    "city": "London",
+    "postalCode": "SW1A 1AA",
+    "country": "GB"
+  }
+}
+```
+
+### Getting Certificates & Learning
+
+TBC...
+
+### Getting Remission/Finance
+
+TBC...
