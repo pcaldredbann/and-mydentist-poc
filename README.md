@@ -141,6 +141,75 @@ Accept: application/json
 }
 ```
 
+### Getting Jobs
+
+```http
+curl --request GET \
+  --url 'https://{host}/ccx/api/staffing/v5/{tenant}/jobs/{jobId}' \
+  --header 'Authorization: Bearer {access_token}' \
+  --header 'Accept: application/json'
+
+{
+  "id": "JOB-12345",
+  "descriptor": "Senior Consultant",
+  "jobProfile": {
+    "id": "JP-001",
+    "descriptor": "Senior Consultant"
+  },
+  "businessTitle": "Principal Consultant",
+  "worker": {
+    "id": "WK-123456",
+    "descriptor": "Jane Smith"
+  },
+  "workerType": {
+    "id": "Employee",
+    "descriptor": "Employee"
+  },
+  "position": {
+    "id": "POS-98765",
+    "descriptor": "Senior Consultant Position"
+  },
+  "supervisoryOrganization": {
+    "id": "SUP-1001",
+    "descriptor": "Consulting Practice"
+  },
+  "location": {
+    "id": "LOC-001",
+    "descriptor": "London Practice"
+  },
+  "timeType": {
+    "id": "FullTime",
+    "descriptor": "Full Time"
+  }
+}
+```
+
+### Getting Community (Org. Chart)
+
+```http
+curl --request GET \
+  --url '/workday/api/staffing/v5/{tenant}/supervisoryOrganizations/{supervisoryOrgId}' \
+  --header 'Authorization: Bearer {access_token}' \
+  --header 'Accept: application/json'
+
+{
+  "id": "SUP-1001",
+  "descriptor": "Consulting Practice",
+  "manager": {
+    "id": "WK-999999",
+    "descriptor": "Alex Brown"
+  },
+  "organizationType": {
+    "id": "SUP",
+    "descriptor": "Supervisory Organization"
+  },
+  "parentOrganization": {
+    "id": "SUP-1000",
+    "descriptor": "Professional Services"
+  }
+}
+```
+
 ### Getting Certificates & Learning
 
 TBC...
