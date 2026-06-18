@@ -7,6 +7,7 @@ This document has been separated into a series of smaller documents, links below
 - [Architecture](docs/architecture.md)
 - [Authentication](docs/authentication.md)
 - [Development](docs/development.md)
+- [Development Team](docs/team.md)
 - [Project Specifics](docs/project.md)
 - [Workday Overview](docs/workday.md)
 
